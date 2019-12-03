@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React Notes</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body style="background-color: #555; color: #009900">
+    <div>
+      <h1>Notes ...</h1>
+      <div id="container"></div>
+    </div>
+    <script type="text/babel">
+      // var notes = ["My Note 1", "My Note 2", "My Notes 3"];
+      class HelloThere extends React.Component {
+        render() {
+          var myStyles = {
+            fontSize: 25
+          };
+	  return <div><p style={myStyles}>{this.props.greetVal}!</p></div>
+        }
+      }
+
+      class Note extends React.Component {
+        render() {
+          var noteStyles = {
+	    backgroundColor: 'yellow',
+	    color: '#333',
+            fontSize: 12,
+	    marginTop: '2em',
+	    padding: 5,
+	    width: 200
+          };
+	  return <div><textarea style={noteStyles} defaultValue={this.props.noteText}></textarea></div>
+        }
+      }
+
+      class Notes extends React.Component {
+        constructor(props) {
+	  super(props);
+	  this.state = { notes: ['Testing 123']};
+	}
+
+	add = () => {
+	  console.log("add - starting");
+	  this.setState((state) => { return {notes: [...state.notes, ' ']}; });
+	}
+
+        render() {
+	  return <div><h5>Notes ...</h5><button onClick={this.add}>+</button>
+              {this.state.notes.map((value, index) => {
+                return <Note noteText={this.state.notes[index]} />
+              })}
+	    </div>
+	}
+      }
+
+      ReactDOM.render(
+	<div>
+	  <HelloThere greetVal="Hello There"><p>Welcome to React Notes</p></HelloThere>
+	  <Notes/>
+	</div>,
+        document.querySelector("#container")
+      );
+    </script>
+  </body>
+</html>
+
+
