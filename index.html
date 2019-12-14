@@ -39,12 +39,18 @@
       class Notes extends React.Component {
         constructor(props) {
 	  super(props);
-	  this.state = { notes: ['Testing 123']};
+	  this.state = { notes: ['']};
+	  this.add = this.add.bind(this);
 	}
 
-	add = () => {
-	  console.log("add - starting");
-	  this.setState((state) => { return {notes: [...state.notes, ' ']}; });
+	add = (e) => {
+	  console.log("add - starting - event:", e);
+	  if (e.shiftKey) {
+            console.log("add - shift key was pressed");
+	  }
+	  //this.setState((state) => { return {notes: [...state.notes, ' ']}; });
+	  // this.setState({notes: [...state.notes, ' ']});
+	  this.setState((prevState) => { return {notes: [...prevState.notes, ' ']}; });
 	}
 
         render() {
