@@ -23,7 +23,14 @@
       }
 
       class Note extends React.Component {
+        constructor(props) {
+	  super(props);
+	  var that = this;
+	  //setInterval(function() { console.log("current note:", that._current_note); }, 5000);
+        }
+
         render() {
+          var self = this;
           var noteStyles = {
 	    backgroundColor: 'yellow',
 	    color: '#333',
@@ -32,7 +39,8 @@
 	    padding: 5,
 	    width: 200
           };
-	  return <div><textarea style={noteStyles} defaultValue={this.props.noteText}></textarea></div>
+	  return <div><textarea style={noteStyles} defaultValue={this.props.noteText}
+		       ref={ function(el) { self._current_note = el;} }></textarea></div>
         }
       }
 
