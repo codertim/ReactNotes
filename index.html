@@ -8,11 +8,21 @@
   </head>
   <body style="background-color: #555; color: #009900">
     <div>
-      <h1>Notes ...</h1>
+      <div id="myheader"></div>
       <div id="container"></div>
     </div>
     <script type="text/babel">
       // var notes = ["My Note 1", "My Note 2", "My Notes 3"];
+
+      class MyHeader extends React.Component {
+        render() {
+          return ReactDOM.createPortal(
+	    "My Notes",
+             myheader
+	  );
+        }
+      }
+
       class HelloThere extends React.Component {
         render() {
           var myStyles = {
@@ -62,7 +72,9 @@
 	}
 
         render() {
-	  return <div><h5>Notes ...</h5><button onClick={this.add}>+</button>
+	  return <div>
+	      <MyHeader />
+	      <h5>Notes ...</h5><button onClick={this.add}>+</button>
               {this.state.notes.map((value, index) => {
                 return <Note noteText={this.state.notes[index]} />
               })}
