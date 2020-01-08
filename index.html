@@ -5,6 +5,8 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+    </style>
   </head>
   <body style="background-color: #555; color: #009900">
     <div>
@@ -37,6 +39,17 @@
 	  super(props);
 	  var that = this;
 	  //setInterval(function() { console.log("current note:", that._current_note); }, 5000);
+        }
+
+        shouldComponentUpdate(nextProps, nextState) {
+          var isUpdating = true;
+          console.log("shouldComponentUpdate - nextProps:", nextProps, " - nextState:", nextState); 
+	  if (nextProps.noteText === this.props.noteText) {
+            isUpdating = false;
+          }
+          console.log("shouldComponentUpdate - isUpdating:", isUpdating);
+
+	  return isUpdating;
         }
 
         render() {
@@ -74,7 +87,7 @@
         render() {
 	  return <div>
 	      <MyHeader />
-	      <h5>Notes ...</h5><button onClick={this.add}>+</button>
+	      <h5>Notes ...</h5><button  onClick={this.add}>+</button>
               {this.state.notes.map((value, index) => {
                 return <Note noteText={this.state.notes[index]} />
               })}
