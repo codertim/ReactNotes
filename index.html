@@ -85,9 +85,14 @@
 	}
 
         render() {
+	  var addBtnStyles = {
+            fontStyle: 'bold',
+            backgroundColor: 'orange'
+          };
+
 	  return <div>
 	      <MyHeader />
-	      <h5>Notes ...</h5><button  onClick={this.add}>+</button>
+	      <h5>Notes ...</h5><button style={addBtnStyles} onClick={this.add}>+</button>
               {this.state.notes.map((value, index) => {
                 return <Note noteText={this.state.notes[index]} />
               })}
