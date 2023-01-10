@@ -84,7 +84,7 @@
 	  this.setState((prevState) => { return {notes: [...prevState.notes, ' ']}; });
 	}
 
-        render() {
+  render() {
 	  var addBtnStyles = {
             fontStyle: 'bold',
             backgroundColor: 'orange'
@@ -97,14 +97,14 @@
                 return <Note noteText={this.state.notes[index]} />
               })}
 	    </div>
-	}
-      }
+  }
+}
 
       ReactDOM.render(
-	<div>
-	  <HelloThere greetVal="Hello There"><p>Welcome to React Notes</p></HelloThere>
-	  <Notes/>
-	</div>,
+        <div>
+          <HelloThere greetVal="Enter notes ..."><p>Welcome to React Notes</p></HelloThere>
+          <Notes/>
+        </div>,
         document.querySelector("#container")
       );
     </script>
