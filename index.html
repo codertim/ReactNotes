@@ -8,7 +8,7 @@
     <style>
     </style>
   </head>
-  <body style="background-color: #555; color: #009900">
+  <body style="background-color: #555; color: yellow;">
     <div>
       <div id="myheader"></div>
       <div id="container"></div>
@@ -17,87 +17,89 @@
       // var notes = ["My Note 1", "My Note 2", "My Notes 3"];
 
       class MyHeader extends React.Component {
-        render() {
-          return ReactDOM.createPortal(
-	    "My Notes",
-             myheader
-	  );
-        }
+          render() {
+              return ReactDOM.createPortal(
+                  "My Notes",
+                  myheader
+	            );
+          }
       }
 
       class HelloThere extends React.Component {
-        render() {
-          var myStyles = {
-            fontSize: 25
-          };
-	  return <div><p style={myStyles}>{this.props.greetVal}!</p></div>
-        }
+          render() {
+              var myStyles = {
+                  fontSize: 12
+              };
+	            return <div><p style={myStyles}>{this.props.greetVal}!</p></div>
+          }
       }
 
       class Note extends React.Component {
-        constructor(props) {
-	  super(props);
-	  var that = this;
-	  //setInterval(function() { console.log("current note:", that._current_note); }, 5000);
-        }
-
-        shouldComponentUpdate(nextProps, nextState) {
-          var isUpdating = true;
-          console.log("shouldComponentUpdate - nextProps:", nextProps, " - nextState:", nextState); 
-	  if (nextProps.noteText === this.props.noteText) {
-            isUpdating = false;
+          constructor(props) {
+	            super(props);
+	            var that = this;
+	            //setInterval(function() { console.log("current note:", that._current_note); }, 5000);
           }
-          console.log("shouldComponentUpdate - isUpdating:", isUpdating);
 
-	  return isUpdating;
-        }
+          shouldComponentUpdate(nextProps, nextState) {
+              var isUpdating = true;
+              console.log("shouldComponentUpdate - nextProps:", nextProps, " - nextState:", nextState); 
+	            if (nextProps.noteText === this.props.noteText) {
+                  isUpdating = false;
+              }
+              console.log("shouldComponentUpdate - isUpdating:", isUpdating);
+
+	            return isUpdating;
+          }
 
         render() {
-          var self = this;
-          var noteStyles = {
-	    backgroundColor: 'yellow',
-	    color: '#333',
+            var self = this;
+            var noteStyles = {
+	          backgroundColor: 'yellow',
+	          color: '#333',
             fontSize: 12,
-	    marginTop: '2em',
-	    padding: 5,
-	    width: 200
-          };
-	  return <div><textarea style={noteStyles} defaultValue={this.props.noteText}
+	          marginTop: '2em',
+	          padding: 5,
+	          width: 200
+        };
+
+	      return <div><textarea style={noteStyles} defaultValue={this.props.noteText}
 		       ref={ function(el) { self._current_note = el;} }></textarea></div>
         }
       }
 
       class Notes extends React.Component {
-        constructor(props) {
-	  super(props);
-	  this.state = { notes: ['']};
-	  this.add = this.add.bind(this);
-	}
+          constructor(props) {
+	            super(props);
+	            this.state = { notes: ['']};
+	            this.add = this.add.bind(this);
+          }
 
-	add = (e) => {
-	  console.log("add - starting - event:", e);
-	  if (e.shiftKey) {
-            console.log("add - shift key was pressed");
-	  }
-	  //this.setState((state) => { return {notes: [...state.notes, ' ']}; });
-	  // this.setState({notes: [...state.notes, ' ']});
-	  this.setState((prevState) => { return {notes: [...prevState.notes, ' ']}; });
-	}
+	        add = (e) => {
+	            console.log("add - starting - event:", e);
+	            if (e.shiftKey) {
+                  console.log("add - shift key was pressed");
+	            }
+	            //this.setState((state) => { return {notes: [...state.notes, ' ']}; });
+	            // this.setState({notes: [...state.notes, ' ']});
+	            this.setState((prevState) => { return {notes: [...prevState.notes, ' ']}; });
+	        }
 
-  render() {
-	  var addBtnStyles = {
-            fontStyle: 'bold',
-            backgroundColor: 'orange'
-          };
+          render() {
+	            var addBtnStyles = {
+                  fontStyle: 'bold',
+                  backgroundColor: 'yellow',
+                  padding: '7px 15px'
+              };
 
-	  return <div>
-	      <MyHeader />
-	      <h5>Notes ...</h5><button style={addBtnStyles} onClick={this.add}>+</button>
+              return <div>
+	                <MyHeader />
+	                <button style={addBtnStyles} onClick={this.add}>+</button>
               {this.state.notes.map((value, index) => {
                 return <Note noteText={this.state.notes[index]} />
               })}
 	    </div>
-  }
+    }
 }
 
       ReactDOM.render(
